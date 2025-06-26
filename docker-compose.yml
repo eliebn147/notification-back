@@ -23,7 +23,7 @@ services:
 
   notification-service:
     container_name: notification-service-docker
-    image: notification-app # Your built notification service image
+    image: eliebn/notification-app # Your built notification service image
     ports:
       - "8081:8081" # Expose your app port
     environment:
@@ -37,7 +37,7 @@ services:
 
   notification-back:
     container_name: notification-back-docker
-    image: notification-back # Your built notification service image
+    image: eliebn/notification-back # Your built notification service image
     ports:
       - "8080:8080" # Expose your app port
     environment:
