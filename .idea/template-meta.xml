@@ -1,0 +1,14 @@
+<template unencoded="false">
+  <roots>
+    <root index="0" path="" />
+    <root index="1" path="notification-app" />
+    <root index="2" path="notification-core" />
+    <root index="3" path="src/main" />
+    <root index="4" path="src/test" />
+    <root index="5" path="notification-app/src/main" />
+    <root index="6" path="notification-app/build/generated/sources/annotationProcessor/java/main" />
+    <root index="7" path="notification-app/src/test" />
+    <root index="8" path="notification-core/src/main" />
+    <root index="9" path="notification-core/src/test" />
+  </roots>
+</template>
