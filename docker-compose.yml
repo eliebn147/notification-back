@@ -28,10 +28,6 @@ services:
       - "8081:8081" # Expose your app port
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      # Aligning with postgresql-docker's environment variables
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-docker:5432/notification
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=password
     depends_on:
       - rabbitmq-docker # Wait for RabbitMQ to be healthy
 
@@ -42,12 +38,16 @@ services:
       - "8080:8080" # Expose your app port
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      # Adding database connection details for notification-back as it depends on postgresql-docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-docker:5432/notification
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=password
     depends_on:
       - rabbitmq-docker # Wait for RabbitMQ to be healthy
+
+  notification-front:
+    container_name: notification-front-docker
+    image: eliebn/notification-front # Your built notification service image
+    ports:
+      - "80:80" # Expose your app port
+    depends_on:
+      - notification-back # Wait for RabbitMQ to be healthy
 
 volumes:
   postgres_data: # Define the named volume for PostgreSQL data
