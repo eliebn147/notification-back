@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
+@CrossOrigin(origins = {"http://localhost:4200", "http://127.0.0.1:4200", "http://notification-front-docker:80"}) // Apply to all methods in this controller
 public class NotificationController {
 
     private final NotificationService notificationService;

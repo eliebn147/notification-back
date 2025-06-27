@@ -1,6 +1,5 @@
 package org.example.core.services;
 
-
 import org.example.core.repositories.NotificationRepository;
 import org.example.core.messaging.NotificationPublisher;
 import org.example.domain.entities.Notification;

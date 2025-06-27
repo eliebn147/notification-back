@@ -8,6 +8,9 @@ import org.example.domain.entities.Notification;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
 
 @Component
 public class NotificationPublisherImpl implements NotificationPublisher {
@@ -30,7 +33,13 @@ public class NotificationPublisherImpl implements NotificationPublisher {
     public void publish(Notification notification) {
         try {
             String json = objectMapper.writeValueAsString(notification);
-            rabbitTemplate.convertAndSend(exchangeName, routingKey, json);
+
+            Message message = MessageBuilder.withBody(json.getBytes())
+                    .setContentType(MessageProperties.CONTENT_TYPE_JSON)  // set content-type application/json
+                    .build();
+
+            rabbitTemplate.send(exchangeName, routingKey, message);
+
             System.out.println("Published to RabbitMQ: " + json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
