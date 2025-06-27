@@ -10,7 +10,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=mypassword
 
   postgresql-docker:
-    container_name: postgresql-docker
+    container_name: postgres-docker
     image: postgres # It's good practice to pin to a specific version for stability
     ports:
       - "5432:5432" # PostgreSQL default port
@@ -40,6 +40,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - rabbitmq-docker # Wait for RabbitMQ to be healthy
+      - postgresql-docker # Wait for RabbitMQ to be healthy
 
   notification-front:
     container_name: notification-front-docker
